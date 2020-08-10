@@ -2,43 +2,45 @@
   <div class="input-container">
     <h1>Wejapa Countries</h1>
 
-    <b-form-group
-      id="fieldset-horizontal"
-      label-cols-sm="4"
-      label-cols-lg="3"
-      description="Let us know your name."
-      label="Enter your name"
-      label-for="input-horizontal"
-    >
-      <b-form-select v-model="selected" :options="options" class="country-select-group mb-3 mt-3">
-        <!-- This slot appears above the options from 'options' prop -->
-        <template v-slot:first>
-          <b-form-select-option :value="null" disabled>-- Please select an option --</b-form-select-option>
-        </template>
-
-        <!-- These options will appear after the ones from 'options' prop -->
-        <b-form-select-option value="C">Option C</b-form-select-option>
-        <b-form-select-option value="D">Option D</b-form-select-option>
-      </b-form-select>
-    </b-form-group>
+    <select name="countries" id="country" @change="onCountry($event)">
+      <option
+        v-for="country in countries"
+        :key="country.key"
+        :v-model="selectedCountry"
+        :value="country.key"
+      >{{country.name}}</option>
+    </select>
   </div>
 </template>
 
 <script>
-import * as Data from "../assets/data.json";
+var world = require("../assets/data.json");
 
 export default {
   data() {
     return {
-      selected: null,
-      options: [
-        { value: "A", text: "Option A (from options prop)" },
-        { value: "B", text: "Option B (from options prop)" },
-      ],
+      countries: [],
+      selectedCountry: "",
     };
   },
   mounted: function () {
-    console.log(Data);
+    this.getCountry();
+    console.log(world);
+  },
+  methods: {
+    getCountry() {
+      world.forEach((element, key) => {
+        this.countries.push({
+          key: key,
+          name: element.name,
+        });
+      });
+    },
+
+    onCountry(event) {
+      this.selectedCountry = event.target.value;
+      console.log("Selected Country", event.target.value);
+    },
   },
   ready: function() {
     this.$el.querySelector('.className').select2();
@@ -48,7 +50,6 @@ export default {
 
 <style scoped>
 .input-container {
-  /* background: red !important; */
   margin: 0 auto;
   width: 100%;
   display: flex;
