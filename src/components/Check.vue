@@ -10,7 +10,7 @@
       label="Enter your name"
       label-for="input-horizontal"
     >
-      <b-form-select v-model="selected" :options="options" class="mb-3 mt-3">
+      <b-form-select v-model="selected" :options="options" class="country-select-group mb-3 mt-3">
         <!-- This slot appears above the options from 'options' prop -->
         <template v-slot:first>
           <b-form-select-option :value="null" disabled>-- Please select an option --</b-form-select-option>
@@ -40,6 +40,9 @@ export default {
   mounted: function () {
     console.log(Data);
   },
+  ready: function() {
+    this.$el.querySelector('.className').select2();
+  }
 };
 </script>
 
