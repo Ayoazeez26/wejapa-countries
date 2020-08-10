@@ -25,31 +25,32 @@
 </template>
 
 <script>
-  export default {
-    data() {
-      return {
-        selected: null,
-        options: [
-          { value: 'A', text: 'Option A (from options prop)' },
-          { value: 'B', text: 'Option B (from options prop)' }
-        ]
-      }
-    },
-    mounted: function() {
-      fetch('../assets/countries+states+cities.json')
-        .then(res => res.json)
-        .then(data => console.log(data))
-    }
-  }
+import * as Data from "../assets/data.json";
+
+export default {
+  data() {
+    return {
+      selected: null,
+      options: [
+        { value: "A", text: "Option A (from options prop)" },
+        { value: "B", text: "Option B (from options prop)" },
+      ],
+    };
+  },
+  mounted: function () {
+    console.log(Data);
+  },
+};
 </script>
 
 <style scoped>
-  .input-container {
-    margin: 0 auto;
-    width: 50%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
+.input-container {
+  /* background: red !important; */
+  margin: 0 auto;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 </style>
