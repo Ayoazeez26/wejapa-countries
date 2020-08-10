@@ -41,9 +41,6 @@ export default {
       this.selectedCountry = event.target.value;
       console.log("Selected Country", event.target.value);
     },
-  },
-  ready: function() {
-    this.$el.querySelector('.className').select2();
   }
 };
 </script>
