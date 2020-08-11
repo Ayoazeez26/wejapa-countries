@@ -3,6 +3,7 @@
     <h1>Wejapa Countries</h1>
 
     <select name="countries" id="country" @change="onCountry($event)">
+      <option>-- Select Country --</option>
       <option
         v-for="country in countries"
         :key="country.key"
@@ -10,7 +11,7 @@
         :value="country.key"
       >{{country.name}}</option>
     </select>
-    
+
     <select name="states" id="state" @change="onState($event)">
       <option
         v-for="state in states"
@@ -31,7 +32,7 @@ export default {
       countries: [],
       selectedCountry: "",
       selectedState: "",
-      states: []
+      states: [],
     };
   },
   mounted: function () {
@@ -48,11 +49,17 @@ export default {
       });
     },
     onCountry(event) {
+      this.states = [];
+      this.selectedState = "";
       this.selectedCountry = event.target.value;
       this.selectedState = this.countries[this.selectedCountry].name;
+      let key = this.selectedCountry;
+      this.getState(key);
     },
-    getState() {
-      world[this.selectedCountry].forEach((element, key) => {
+    getState(key) {
+      let findCountry = world[key];
+      console.log(findCountry);
+      findCountry.states.forEach((element, key) => {
         this.states.push({
           key: key,
           name: element.name,
@@ -62,8 +69,8 @@ export default {
     onState(event) {
       this.selectedState = event.target.value;
       console.log(this.selectedState);
-    }
-  }
+    },
+  },
 };
 </script>
 
