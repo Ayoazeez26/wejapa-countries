@@ -10,6 +10,15 @@
         :value="country.key"
       >{{country.name}}</option>
     </select>
+    
+    <select name="states" id="state" @change="onState($event)">
+      <option
+        v-for="state in states"
+        :key="state.key"
+        :v-model="selectedState"
+        :value="state.key"
+      >{{state.name}}</option>
+    </select>
   </div>
 </template>
 
@@ -21,11 +30,13 @@ export default {
     return {
       countries: [],
       selectedCountry: "",
+      selectedState: "",
+      states: []
     };
   },
   mounted: function () {
     this.getCountry();
-    console.log(world);
+    // console.log(world);
   },
   methods: {
     getCountry() {
@@ -36,11 +47,22 @@ export default {
         });
       });
     },
-
     onCountry(event) {
       this.selectedCountry = event.target.value;
-      console.log("Selected Country", event.target.value);
+      this.selectedState = this.countries[this.selectedCountry].name;
     },
+    getState() {
+      world[this.selectedCountry].forEach((element, key) => {
+        this.states.push({
+          key: key,
+          name: element.name,
+        });
+      });
+    },
+    onState(event) {
+      this.selectedState = event.target.value;
+      console.log(this.selectedState);
+    }
   }
 };
 </script>
