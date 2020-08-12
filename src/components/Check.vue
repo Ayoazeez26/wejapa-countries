@@ -115,4 +115,13 @@ export default {
   justify-content: center;
   align-items: center;
 }
+
+select {
+  width: 300px;
+  height: 50px;
+  border: 1px solid #DDD;
+  border-radius: 5px;
+  padding: 5px 10px;
+  text-transform: uppercase;
+}
 </style>
