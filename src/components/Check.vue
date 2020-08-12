@@ -1,8 +1,8 @@
 <template>
   <div class="input-container">
-    <h1>Wejapa Countries</h1>
+    <h1 class="mb-3">Wejapa Countries</h1>
 
-    <select name="countries" id="country" @change="onCountry($event)" class="mb-3">
+    <select name="countries" id="country" @change="onCountry($event)" class="mt-3 mb-3">
       <option>-- Select Country --</option>
       <option
         v-for="country in countries"
